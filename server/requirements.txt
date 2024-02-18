@@ -1,0 +1,11 @@
+flask
+flask-SQLAlchemy
+psycopg2
+
+flask-restful
+flask-cors
+flask-jwt-extended
+passlib
+requests
+
+gunicorn
