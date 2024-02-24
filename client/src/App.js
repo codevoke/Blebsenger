@@ -39,11 +39,8 @@ function App() {
   const setterWithObserver = (data) => {
     setData({...data});
     console.log("Observer: ", data);
-    localStorage.setItem("auth", data.auth);
-    localStorage.setItem("access_token", data.access_token);
-    localStorage.setItem("avatar", data.avatar);
-    localStorage.setItem("username", data.username);
-    localStorage.setItem("user_id", data.user_id)
+    for (const [key, value] of Object.entries(data))
+      localStorage.setItem(key, value);    
   }
 
   return (
@@ -54,14 +51,14 @@ function App() {
         <Data.Provider value={{user: data, setter: setterWithObserver}}>
           <Header />
           <Routes>
-            <Route path="/*" element={<LandingPage />} />
+            <Route path="/" element={<LandingPage />} />
             <Route path='/login' element={<LoginPage />} />
             <Route path="/logout" element={<LogoutPage />} />
             <Route path="/register" element={<RegisterPage />} />
             <Route path="/forgot-password" element={<ForgotPasswordPage />} />
             <Route path='/dialogs' element={<MainPage />} />            
-            <Route path="/settings" element={<SettingsPage />} />
-
+            <Route path="/settings" element={<SettingsPage />} /> 
+            <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </Data.Provider>
       </BrowserRouter>
